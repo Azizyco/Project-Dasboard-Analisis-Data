@@ -157,6 +157,12 @@ function updateStats() {
     const totalOrders = filteredTransactions.length;
     const avgOrderValue = totalOrders > 0 ? totalSales / totalOrders : 0;
 
+    // Calculate total units sold
+    const totalUnits = filteredTransactions.reduce((sum, t) => {
+        const qty = parseFloat(t.quantity);
+        return sum + (isNaN(qty) ? 0 : qty);
+    }, 0);
+
     // Get top product
     const salesByProduct = {};
     filteredTransactions.forEach(t => {
@@ -176,6 +182,7 @@ function updateStats() {
     // Update UI
     document.getElementById('totalSales').textContent = utils.formatCurrency(totalSales);
     document.getElementById('totalOrders').textContent = `${utils.formatNumber(totalOrders)} transaksi`;
+    document.getElementById('totalUnits').textContent = `${utils.formatNumber(totalUnits)} unit`;
     document.getElementById('topProduct').textContent = topProduct || '-';
     document.getElementById('topProductSales').textContent = utils.formatCurrency(salesByProduct[topProduct] || 0);
     document.getElementById('topRegion').textContent = topRegion || '-';
