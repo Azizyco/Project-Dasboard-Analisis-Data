@@ -7,11 +7,7 @@ Dashboard penjualan lengkap dengan analytics menggunakan **Vanilla JavaScript**,
 - [Fitur](#-fitur)
 - [Teknologi](#-teknologi)
 - [Struktur Folder](#-struktur-folder)
-- [Setup](#-setup)
-- [Cara Menjalankan](#-cara-menjalankan)
-- [Penggunaan](#-penggunaan)
-- [Keamanan](#-keamanan)
-- [FAQ](#-faq)
+
 
 ---
 
@@ -92,4 +88,5 @@ Nama Project ku
 ```
 
 ---
+
 
