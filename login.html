@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Dashboard - Start</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-title">📊 Sales Dashboard</h1>
+                <p class="login-subtitle">Klik tombol di bawah untuk memulai</p>
+            </div>
+
+            <div class="card-body">
+                <p class="mb-3" style="color: #4b5563; text-align: center;">
+                    Aplikasi ini kini <strong>tanpa login</strong>. Anda bisa langsung melihat
+                    dashboard penjualan hanya dengan satu klik.
+                </p>
+
+                <button class="btn btn-primary btn-block" onclick="startDashboard()">
+                    Mulai Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startDashboard() {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

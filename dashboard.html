@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sales Analytics</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="dashboard.html" class="navbar-brand">📊 Sales Dashboard</a>
+        <div class="navbar-menu">
+            <a href="dashboard.html" class="navbar-link">Dashboard</a>
+            <a href="admin.html" class="navbar-link">Admin Panel</a>
+        </div>
+        <div class="navbar-user">
+            <span class="user-badge" id="userBadge">Loading...</span>
+            <button class="btn btn-secondary" onclick="handleLogout()">Kembali</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container-fluid">
+        <!-- Alert Message -->
+        <div id="alertMessage" class="alert"></div>
+
+        <!-- Filters -->
+        <div class="filter-section">
+            <h3 class="card-header">Filter Data</h3>
+            <div class="filter-grid">
+                <div class="form-group">
+                    <label class="form-label">Tanggal Mulai</label>
+                    <input type="date" id="startDate" class="form-input" onchange="applyFilters()">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tanggal Akhir</label>
+                    <input type="date" id="endDate" class="form-input" onchange="applyFilters()">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Produk</label>
+                    <select id="productFilter" class="form-select" onchange="applyFilters()">
+                        <option value="">Semua Produk</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Wilayah</label>
+                    <select id="regionFilter" class="form-select" onchange="applyFilters()">
+                        <option value="">Semua Wilayah</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button class="btn btn-primary" onclick="applyFilters()">Terapkan Filter</button>
+                <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Penjualan</div>
+                <div class="stat-value" id="totalSales">Rp 0</div>
+                <div class="stat-subtext" id="totalOrders">0 transaksi</div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-label">Produk Terlaris</div>
+                <div class="stat-value" id="topProduct">-</div>
+                <div class="stat-subtext" id="topProductSales">Rp 0</div>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-label">Wilayah Tertinggi</div>
+                <div class="stat-value" id="topRegion">-</div>
+                <div class="stat-subtext" id="topRegionSales">Rp 0</div>
+            </div>
+            <div class="stat-card purple">
+                <div class="stat-label">Average Order Value</div>
+                <div class="stat-value" id="avgOrderValue">Rp 0</div>
+                <div class="stat-subtext">Per transaksi</div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="chart-grid">
+            <!-- Sales by Product Chart -->
+            <div class="chart-container">
+                <h3 class="chart-title">Top 10 Penjualan Per Produk</h3>
+                <canvas id="salesByProductChart"></canvas>
+            </div>
+
+            <!-- Sales by Region Chart -->
+            <div class="chart-container">
+                <h3 class="chart-title">Penjualan Per Wilayah</h3>
+                <canvas id="salesByRegionChart"></canvas>
+            </div>
+
+            <!-- Sales by Month Chart (Full Width) -->
+            <div class="chart-container full-width">
+                <h3 class="chart-title">Tren Penjualan Bulanan</h3>
+                <canvas id="salesByMonthChart"></canvas>
+            </div>
+
+            <!-- Monthly Sales by Product (Full Width) -->
+            <div class="chart-container full-width">
+                <div class="flex-between mb-2">
+                    <h3 class="chart-title">Tren Penjualan Bulanan Per Produk</h3>
+                    <select id="productTrendSelect" class="form-select" style="width: 250px;" onchange="updateProductTrendChart()">
+                        <option value="">Pilih Produk...</option>
+                    </select>
+                </div>
+                <canvas id="productTrendChart"></canvas>
+            </div>
+
+            <!-- AOV by Region Chart -->
+            <div class="chart-container">
+                <h3 class="chart-title">Average Order Value Per Wilayah</h3>
+                <canvas id="aovByRegionChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
